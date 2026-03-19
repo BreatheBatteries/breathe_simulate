@@ -2,7 +2,7 @@
 
 A python based api wrapper for running the breathe simulate model.
 
-> **Registration Required**: To use the Breathe Simulate API, you must register for a free trial. You can sign up at [https://www.breathebatteries.com/breathe-design-free-trial](https://www.breathebatteries.com/breathe-design-free-trial).
+> **Registration Required**: To use the Breathe Simulate API, you must register for a free trial. You can sign up at [https://breathebatteries.com/knowledge-hub/simulate-trial/](https://breathebatteries.com/knowledge-hub/simulate-trial/).
 
 ## Installation steps
 
