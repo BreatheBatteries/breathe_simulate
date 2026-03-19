@@ -1,10 +1,17 @@
 # Changelog
 
-## [2.0.0] - 03/03/2026
+## [2.0.1] - 19/03/2026
+
+### Changed
+
+- updated the registration link in the README
+
+## [2.0.0] - 18/03/2026
 
 ### Changed
 
 - `breathe_design` is now called `breathe_simulate`
+
 ## [1.8.1] - 03/03/2026
 
 ### Added
