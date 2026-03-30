@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.0] - 28/03/2026
+
+### Added
+
+- optional dynamic-analysis controls for anode potential, temperature, and SoC / voltage-based step profiles
+
 ## [2.0.1] - 19/03/2026
 
 ### Changed
