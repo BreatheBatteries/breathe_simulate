@@ -1,5 +1,22 @@
 # Changelog
 
+##  [2.1.5] - 23/06/2026
+
+### Fixed
+
+- typo in example notebook
+
+##  [2.1.4] - 23/06/2026
+
+### Added
+
+- `isothermal` flag on `run_sim`  runs the dynamic simulation at constant cell temperature (held at `initialTemperature_degC`, no self-heating or ambient exchange). Applies to every run in a batch sweep and is recorded in `input_parameters`.
+- `electrodeArea_cm2` (cathode plate area) and `anodeCathodeAreaRatio` (anode/cathode coating-area ratio) exposed as read-only outputs in `get_design_parameters`. If passed back inside a design they are dropped with a guidance warning, they are geometry-derived, not settable knobs.
+
+### Changed
+
+- `heatTransferCoefficient` upper bound removed (was 1000 W/m²/K); any value `>= 0` is now accepted. Lower bound unchanged.
+
 ## [2.1.0] - 28/03/2026
 
 ### Added
