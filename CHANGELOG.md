@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.2.0] - 29/07/2026
+
+### Added
+
+- Degradation simulation: `run_ageing_sim` runs cycle-by-cycle ageing campaigns (baseline RPT, N ageing cycles, RPT, repeat) on degradation-calibrated cells, with SEI growth, lithium plating and mechanical damage mechanisms.
+- `AgeingCycler` builds the ageing protocol: CC-CV cycling in voltage and/or SoC windows, calendar storage, fully custom cycles, and drive cycles from CSV with per-leg ambient temperatures and voltage/SoC guards.
+- Power as an input alongside current: CSV power profiles (`type="power"`), power control arrays, and command strings in watts.
+- `RptCycler` builds the check-up: user-defined capacity checks, HPPC-style DCIR pulse maps, configurable rests and conditioning, and an optional dedicated DVA cycle.
+- `describe()`, `template()`, `preview()` and `plot_preview()` on both builders.
+- Campaign controls: RPT cadence, stop criteria (SoH, DCIR, energy throughput, time, max cycles), SoC reference (latest RPT or beginning of life), phased schedules, and thermal controls matching `run_sim`.
+- End-of-campaign performance test: any `run_sim` cycler executed on the aged cell, returned in `run_sim`'s format.
+- `AgeingSimulationResults`: per-RPT, per-capacity-check, per-pulse and per-cycle tables, a labelled campaign timeseries with step filtering, DVA/ICA curves, fast-charge time over life (`charge_time_soc_window`) with an opt-in per-cycle charge analysis, the LLI split between SEI and plating, the per-cycle minimum anode potential, and plots for each.
+- `get_operating_window(base_battery)`: the enforced limits for both simulation families, with an explicit answer when a cell has no degradation model.
+- Calibration validity windows enforced on everything that runs. Campaigns outside the fitted range are rejected up front.
+- Example notebook series: a first campaign, protocol design, results analysis, and performance testing fresh and aged cells.
+
 ##  [2.1.5] - 23/06/2026
 
 ### Fixed
