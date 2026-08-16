@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.5.0] - 14/08/2026
+
+### Added
+
+- ECM generation: `generate_ecm` fits an equivalent circuit model (1, 2 or 3 RC pairs) to any cell design and returns look-up tables over SoC, temperature and C-rate, plus OCV curves and thermal constants. Configure the fit with `ecm_options`, inspect it with `to_dataframe()` and `plot_parameters()`, and round-trip it with `save()`/`load()`.
+- Aged-cell ECMs: `run_ageing_sim(..., ecm=True)` fits the ECM at the end-of-campaign aged state, available as `result.ecm`. Compare against a fresh fit to see how the circuit parameters drift with degradation.
+- Example notebook 14 ECM Generation walks through a fresh fit and a fresh versus aged comparison.
+
+### Changed
+
+- Queued `run_sim` jobs no longer have a client-side time limit, matching `run_ageing_sim`.
+
+## [2.3.0] - 06/08/2026
+
+### Added
+
+- `capacityVariationPercent` design knob on `run_sim` (-5 to +5): cell-to-cell capacity variation, matching the Simulink block parameter. See the cell parameter list and the run_sim docstring.
+- Cell-to-cell capacity variation section in the Manufacturing Variability example notebook.
+
 ## [2.2.0] - 29/07/2026
 
 ### Added
