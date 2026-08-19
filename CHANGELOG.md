@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.5.3] - 19/08/2026
+
+### Changed
+
+- Example notebook ECM Generation: truncated the thermal constants output.
+
+## [2.5.2] - 18/08/2026
+
+### Changed
+
+- Example notebook ECM Generation updated: denser fit grids and new comparison plots.
+
 ## [2.5.1] - 16/08/2026
 
 First published release containing the 2.5.0 changes below. No package changes beyond the release itself.
@@ -10,7 +22,7 @@ First published release containing the 2.5.0 changes below. No package changes b
 
 - ECM generation: `generate_ecm` fits an equivalent circuit model (1, 2 or 3 RC pairs) to any cell design and returns look-up tables over SoC, temperature and C-rate, plus OCV curves and thermal constants. Configure the fit with `ecm_options`, inspect it with `to_dataframe()` and `plot_parameters()`, and round-trip it with `save()`/`load()`.
 - Aged-cell ECMs: `run_ageing_sim(..., ecm=True)` fits the ECM at the end-of-campaign aged state, available as `result.ecm`. Compare against a fresh fit to see how the circuit parameters drift with degradation.
-- Example notebook 14 ECM Generation walks through a fresh fit and a fresh versus aged comparison.
+- Example notebook ECM Generation walks through a fresh fit and a fresh versus aged comparison.
 
 ### Changed
 
