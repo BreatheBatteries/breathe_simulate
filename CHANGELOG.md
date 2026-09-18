@@ -1,5 +1,35 @@
 # Changelog
 
+## [2.7.0] - 15/09/2026
+
+### Added
+
+- Pulse heating for cold cells: `generate_pulse_heating_lut` gives the largest zero-mean current pulse a cell can take at each state of charge and temperature without breaching its voltage cutoffs, its anode plating threshold or its cathode ceiling. Choose the pulse frequency and the limits, and get back a table you can inspect with `to_dataframe()` and `plot()`.
+- `Cycler.pulse_heating` flies that table in a simulation. The amplitude follows the cell's own state of charge and temperature as it warms, so the applied current rises as the cell's resistance falls. The run stops at a target temperature or after a set duration.
+- `generate_resistance_vs_frequency` shows how total cell resistance falls as the pulse frequency rises, from the DC value down towards the high-frequency floor. This is the reason pulse heating runs fast: the double layer shunts the charge-transfer path, leaving more headroom for a larger amplitude within the same voltage limits. Requires a cell with a fitted double layer.
+
+
+## [2.5.4] - 24/08/2026
+
+### Fixed
+
+- Design parameters are checked before a simulation is sent. An unsupported key in a `run_sim` design used to fail part-way through with an unhelpful error; it now raises straight away, listing the supported design parameters and suggesting the intended one when it looks like a typo.
+- The ageing state can be written the way `get_aged_ocv` spells it — `LAMPE`, `LAMNE`, `LLI`, in any capitalisation — inside a design dict. It is read as `lampe`/`lamne`/`lli` with a warning, rather than failing the simulation.
+- `aluminumThickness_um` is accepted and read as `aluminiumThickness_um`, the name the simulation uses. The cell parameter list now shows the correct spelling.
+- `separatorPorosity` removed from the cell parameter list. It was listed as a design parameter, but separator porosity comes from the cell's separator component and could never be applied to a design.
+
+## [2.5.3] - 19/08/2026
+
+### Changed
+
+- Example notebook ECM Generation: truncated the thermal constants output.
+
+## [2.5.2] - 18/08/2026
+
+### Changed
+
+- Example notebook ECM Generation updated: denser fit grids and new comparison plots.
+
 ## [2.5.1] - 16/08/2026
 
 First published release containing the 2.5.0 changes below. No package changes beyond the release itself.
@@ -10,7 +40,7 @@ First published release containing the 2.5.0 changes below. No package changes b
 
 - ECM generation: `generate_ecm` fits an equivalent circuit model (1, 2 or 3 RC pairs) to any cell design and returns look-up tables over SoC, temperature and C-rate, plus OCV curves and thermal constants. Configure the fit with `ecm_options`, inspect it with `to_dataframe()` and `plot_parameters()`, and round-trip it with `save()`/`load()`.
 - Aged-cell ECMs: `run_ageing_sim(..., ecm=True)` fits the ECM at the end-of-campaign aged state, available as `result.ecm`. Compare against a fresh fit to see how the circuit parameters drift with degradation.
-- Example notebook 14 ECM Generation walks through a fresh fit and a fresh versus aged comparison.
+- Example notebook ECM Generation walks through a fresh fit and a fresh versus aged comparison.
 
 ### Changed
 
