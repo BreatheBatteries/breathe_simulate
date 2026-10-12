@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.10.0] - 09/10/2026
+
+### Added
+
+- Start a simulation from a known hysteresis state with `run_sim(initialHysteresis=...)`: `-1` for a cell that was last discharged, `+1` for one that was last charged, `0` for the mean open-circuit voltage, or anything in between for a cell that has partly relaxed. Combined with `initialSoC` it sets the resting voltage the simulation starts from; combined with `initialVoltage` it decides which branch of the OCV that voltage is read on, and therefore the state of charge the cell starts at. Pass a list to sweep several states in one call. See the new example notebook *Initial state and hysteresis*.
+
+### Changed
+
+- `initialVoltageOcvType` is deprecated in favour of `initialHysteresis` (`charge` / `mean` / `discharge` corresponds to `+1` / `0` / `-1`). Existing calls keep working.
+
+## [2.9.0] - 09/10/2026
+
+### Added
+
+- Customers that have a Breathe Discover account can simulate a Discover virtual battery with `run_sim`: pass `virtual_battery_uuid` instead of `base_battery`. The virtual battery's own design is simulated, design changes included, together with its unmodified baseline cell as `"Baseline"`. In the results, the virtual battery's entry is named by its uuid. You need access to a Discover project the virtual battery belongs to and to the design components it uses. It can't be combined with `designs` or `formats`.
+
+  ```python
+  vb = api.get_virtual_battery("6b1f0a52-4f0e-4c1d-9a8e-3c2f6d7e8a90")
+  results = api.run_sim(virtual_battery_uuid=vb["uuid"], cycler=cycler, initialSoC=1.0)
+  ```
+
 ## [2.7.0] - 15/09/2026
 
 ### Added
