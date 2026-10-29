@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.11.0] - 27/10/2026
+
+### Added
+
+- Resolve a DCIR pulse finely with `Cycler.dcir(..., pulse_period_s=0.05)`: the solver period of the pulse step can be between 0.01 and 1 s. Left out, the pulse is solved at about one hundredth of its duration (a 10 s pulse at 0.1 s), and the rests stay at 1 s.
+
+  ```python
+  cycler_dict = cycler.dcir(I_app=-1.0, t_dur=10.0, t_rest_before=5.0, t_rest_after=100.0, V_min=2.5, V_max=4.2, pulse_period_s=0.05)
+  ```
+
+### Changed
+
+- The time series in `run_sim` results now follows the steps of your protocol instead of one even grid over the whole run.
+  - Each step keeps its own samples, so a short step between long ones keeps its resolution.
+
+## [2.10.1] - 12/10/2026
+
+### Fixed
+
+- When a simulation fails, the error now tells you why. You get `Job <id> failed:` followed by the reason from the simulation service, for example a format that couldn't be found, instead of a generic "Unknown satus waiting for job" message.
+
 ## [2.10.0] - 09/10/2026
 
 ### Added
