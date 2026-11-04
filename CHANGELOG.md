@@ -1,5 +1,38 @@
 # Changelog
 
+## [2.14.0] - 02/11/2026
+
+### Added
+
+- `save_mat()` on ECM results writes the fitted equivalent circuit model as a MATLAB `.mat` file for the Breathe Simulate ECM blocks. Load the file in MATLAB and set the block parameter `p` to `ecmParams`. An ECM fitted at an aged state records that state in the file.
+
+## [2.13.0] - 02/11/2026
+
+### Added
+
+- `model.get_job_result(uuid)` picks up a running or finished simulation again by its job id, for example after a timeout, Ctrl-C or a kernel restart. It returns the raw result dict, not a results object. Pass `wait=False` to check once without waiting.
+
+### Changed
+
+- `run_sim` and `run_ageing_sim` now print the job id when they submit a simulation.
+- `run_sim` and `run_ageing_sim` stop waiting after 20 minutes by default. The simulation keeps running, and the error tells you how to fetch it with `get_job_result`. For longer runs, such as long ageing campaigns, pass `timeout=datetime.timedelta(hours=2)` or `timeout=None` to wait without a limit.
+- Pressing Ctrl-C while waiting prints the job id so you can fetch the result later.
+
+## [2.12.0] - 28/10/2026
+
+### Changed
+
+- `preserveNpRatio` has been removed. Design values are now applied as given and the N/P ratio is recalculated from the electrode loadings. To keep a particular N/P ratio, set `NPratio`: the anode is set from the cathode, or the cathode from the anode if your design sets the anode thickness or loading. A design that still sets `preserveNpRatio` raises an error.
+- `make_manufacturing_variations`: `preserve_np_ratio` is replaced by `np_ratio`. Pass a value to give every sample that N/P ratio; leave it out and the N/P ratio follows from the sampled electrodes.
+
+### Added
+
+- `np_adjusted` on simulation results names the electrode that was changed to meet `NPratio`, for each design that sets it.
+
+### Fixed
+
+- `get_eqm_kpis` now checks designs before sending them, as `run_sim` does, so typos and removed keys raise an error straight away.
+
 ## [2.11.0] - 27/10/2026
 
 ### Added
