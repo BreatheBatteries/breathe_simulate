@@ -1,5 +1,30 @@
 # Changelog
 
+## [2.15.1] - 07/11/2026
+
+### Fixed
+
+- `compare_designs()` now works on batch results (from `run_sim` with a list of starting conditions). Batch results share the same KPIs in every simulation, so it draws one chart, and `"radar"` is supported too.
+- You can pass a list of designs to `get_kpis`, `get_normalized_kpis`, `plot_radar` and `compare_designs`, on single and batch results. `get_normalized_kpis("My design")` works, with the Baseline as its first column. If a design name isn't found, the error lists the designs that are available.
+- `compare_designs(designs=[...])` adds the Baseline when your list leaves it out, since every comparison is made against it.
+
+### Changed
+
+- Six KPIs now have readable names in KPI tables, comparison charts and the sensitivity heatmap: **Specific Heat Capacity [kJ/kg/K]**, **Thermal Conductivity In-plane [W/m/K]**, **Thermal Conductivity Through-plane [W/m/K]**, **Price [USD]**, **Price [USD/kWh]** and **Price [USD/kg]**. If your code looks these up by their old names (for example `kpis.loc["price_usd"]`), use the new names.
+
+### Added
+
+- A **Results** page in the API reference documents the results objects returned by `get_eqm_kpis`, `run_sim` and `run_ageing_sim`, with fuller descriptions of their methods. The `Cycler` step-builder methods and `enable_notebook_plotly` are documented too.
+- Corrected spelling and wording in the example notebooks, and fixed text that didn't match the code.
+
+## [2.15.0] - 05/11/2026
+
+### Added
+
+- Simulation results now show the design each run actually used: `results.design_parameters` lists the resolved N/P ratio, voltage limits and the anode and cathode porosity, thickness and loadings for every design. For example, if you set `NPratio` and a thicker cathode, you can read off the anode thickness that results.
+- Run a Discover project's KPIs from Python. `list_kpis(project)` shows the KPIs the project defines and their settings; `run_kpi(project, kpi, ...)` runs one on a cell (with design changes) or on a Discover virtual battery and returns the results per design. Results are not saved to the project.
+- Customers with a Breathe Discover account can find, create and edit their Discover projects from Python: `list_projects`, `get_project`, `create_project`, `update_project`, plus `list_design_spaces` and `list_kpi_sets` to see what can be linked. Look projects up by name or uuid. See the new example "Discover projects".
+
 ## [2.14.0] - 02/11/2026
 
 ### Added
