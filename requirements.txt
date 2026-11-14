@@ -1,1 +1,1 @@
-breathe_simulate >= 2.15.2
+breathe_simulate >= 2.16.0
