@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.16.0] - 14/11/2026
+
+### Fixed
+
+- ECM generation now fits the ECM against the same physics model `run_sim` uses for the cell, and holds the cell at each temperature of `temp_grid_degC` throughout the fit under isothermal fitting conditions.
+
+### Removed
+
+- `ecm_options` no longer accepts `heatTransferCoefficient`, `ambientTemperature_degC` or `initialTemperature_degC`; passing them raises a `TypeError`. Set the fit temperatures with `temp_grid_degC`. The `heatTransferCoefficient` setting of `run_sim` and `run_ageing_sim` is unchanged.
+
+### Changed
+
+- MATLAB parameter sets from `save_mat` record `ecmParams.meta.modelVersion` as `>=v1.0.0` (the Breathe Simulate ECM block versions they work with) and `modelParameterisationVersion` as `ECM_2RC_v6` (for a 2nd order fit). If your code checks for `_v5`, accept `_v6` too.
+
 ## [2.15.1] - 07/11/2026
 
 ### Fixed
